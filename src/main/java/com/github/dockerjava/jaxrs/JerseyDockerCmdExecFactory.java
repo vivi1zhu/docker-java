@@ -1,5 +1,7 @@
 package com.github.dockerjava.jaxrs;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import com.github.dockerjava.api.command.AttachContainerCmd;
 import com.github.dockerjava.api.command.AuthCmd;
@@ -141,6 +143,11 @@ public class JerseyDockerCmdExecFactory implements DockerCmdExecFactory {
         clientConfig.register(JsonClientFilter.class);
         clientConfig.register(JacksonJsonProvider.class);
         RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        clientConfig.register(new JacksonJsonProvider(objectMapper));
+
         // logging may disabled via log level
         clientConfig.register(new SelectiveLoggingFilter(LOGGER, true));
 
