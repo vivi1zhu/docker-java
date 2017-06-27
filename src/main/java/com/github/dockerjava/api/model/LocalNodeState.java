@@ -17,6 +17,9 @@ public enum LocalNodeState {
     ACTIVE,
 
     @JsonProperty("error")
-    ERROR
+    ERROR,
+
+    @JsonProperty("locked")
+    LOCKED
 
 }

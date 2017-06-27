@@ -62,7 +62,7 @@ public class ListContainersCmdExecTest extends AbstractNettyDockerClientTest {
         String testImage = "busybox";
 
         // // need to block until image is pulled completely
-        // dockerClient.pullImageCmd(testImage).exec(new PullImageResultCallback()).awaitSuccess();
+        dockerClient.pullImageCmd(testImage).exec(new PullImageResultCallback()).awaitSuccess();
 
         List<Container> containers = dockerClient.listContainersCmd().withShowAll(true).exec();
         assertThat(containers, notNullValue());
