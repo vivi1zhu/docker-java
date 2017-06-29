@@ -34,6 +34,8 @@ public class SwarmInfo implements Serializable {
     private String nodeAddr;
 
     /**
+     * Not {@link LocalNodeState}, because in swarm it string and we got error:
+     *
      * @since 1.24
      */
     @JsonProperty("LocalNodeState")
